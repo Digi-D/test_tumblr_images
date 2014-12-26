@@ -1,0 +1,31 @@
+{
+  "name": "tumblr_read_experiment",
+  "version": "0.0.0",
+  "description": "Test Tumblr photo download",
+  "main": "test_1_app.js",
+  "dependencies": {
+    "express": "^4.10.6",
+    "request": "^2.51.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Digi-D/test_tumblr_images.git"
+  },
+  "keywords": [
+    "tumblr",
+    "photos",
+    "proof",
+    "of",
+    "concept"
+  ],
+  "author": "d",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Digi-D/test_tumblr_images/issues"
+  },
+  "homepage": "https://github.com/Digi-D/test_tumblr_images"
+}
