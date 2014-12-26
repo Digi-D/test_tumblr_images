@@ -1,4 +1,8 @@
+var express = require("express");
 var request = require("request");
+
+var app = express();
+
 
 var url = "http://rad0m1mg.tumblr.com/api/read/json";
 
@@ -23,3 +27,7 @@ request({
         }
     }
 });
+
+
+var port = Number(process.env.PORT|| 3000);
+app.listen(port);
