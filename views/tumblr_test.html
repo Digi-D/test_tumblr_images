@@ -1,0 +1,30 @@
+<p> the blog is <a href="http://rad0m1mg.tumblr.com" target="_new">_AT_</a></p>
+<div id="stage"> </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    $.getJSON('/api/tumblr_test',function(list_of_photos){
+
+     for(var count=0;count<list_of_photos.length;count++)
+     {
+          //console.log(list_of_photos[count]+"\n");
+          $('#stage').append("<img id='frame_"+count+"' src='"+list_of_photos[count]+"' style='position:absolute; top:40px; left:40px;z-index:"+count+"; opacity:0.0;'/>");
+     }
+
+    });
+
+    var everyFrame=setInterval(updateFrame,100);
+
+    function updateFrame(){
+        var randomFrame="#frame_"+Math.floor(Math.random()*10);
+        var randomOpacity=Math.abs(Math.random()-0.5);
+        //console.log(randomOpacity);
+
+        $(randomFrame).css('opacity', randomOpacity);
+    }
+
+  });
+
+</script>
