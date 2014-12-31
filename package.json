@@ -23,6 +23,9 @@
     "of",
     "concept"
   ],
+  "engines": {
+    "node": "0.10.x"
+  },
   "author": "d",
   "license": "ISC",
   "bugs": {
