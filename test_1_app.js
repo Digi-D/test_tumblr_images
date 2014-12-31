@@ -1,3 +1,5 @@
+// on heroku at https://floating-retreat-1732.herokuapp.com
+
 var express = require("express");
 var request = require("request");
 var hbs = require("hbs");
@@ -51,4 +53,4 @@ app.get('/api/tumblr_test',function(request, response) {
 });
 
 
-app.listen(5000);
+app.set('port', (process.env.PORT || 5000));
