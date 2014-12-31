@@ -5,6 +5,7 @@
   "main": "test_1_app.js",
   "dependencies": {
     "express": "^4.10.6",
+    "hbs": "^2.8.0",
     "request": "^2.51.0"
   },
   "devDependencies": {},

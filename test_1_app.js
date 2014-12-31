@@ -1,10 +1,17 @@
 var express = require("express");
 var request = require("request");
+var hbs = require("hbs");
 
 var app = express();
+app.use(express.static('public'));
+app.use(express.static('bower_components'));
+
+app.set('view engine', 'html');
+app.engine('html', require('hbs').__express);
 
 
 var url = "http://rad0m1mg.tumblr.com/api/read/json";
+var photo_urls= new Array();
 
 request({
     url: url,
@@ -23,11 +30,25 @@ request({
 
         for(var i=0;i<blog_stream.posts.length;i++)
         {
-          console.log(i+": "+ blog_stream['posts'][i]['photo-url-500']);
+          //console.log(i+": "+ blog_stream['posts'][i]['photo-url-500']);
+          photo_urls[i]=blog_stream['posts'][i]['photo-url-500'];
+
         }
+    }
+    else
+    {
+        photo_urls[0]='none';
     }
 });
 
 
-var port = Number(process.env.PORT|| 3000);
-app.listen(port);
+app.get('/', function(request, response) {
+    response.render('tumblr_test', { title: 'grab Nf0 from tumblr blog', layout: 'tumblr_test_layout' });
+});
+
+app.get('/api/tumblr_test',function(request, response) {
+  response.json(photo_urls);
+});
+
+
+app.listen(5000);
