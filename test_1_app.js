@@ -14,36 +14,44 @@ app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 
 
-var url = "http://rad0m1mg.tumblr.com/api/read/json";
-var photo_urls= new Array();
+//var url = "http://rad0m1mg.tumblr.com/api/read/json";
 
-request({
-    url: url,
-    json: true
-}, function (error, response, body) {
 
-    if (!error && response.statusCode === 200) {
-        //console.log(body) // Print the json response
-        var inhale_jsonp=body;
+function GetPhotoURLs(url){
 
-        //clean and parse JSONp response from tumblr API
-        var blog_stream= inhale_jsonp.substring(22,inhale_jsonp.length-2);
-        blog_stream=JSON.parse(blog_stream);
+  var photo_urls= new Array();
 
-        //console.log(blog_stream['posts'][0]['photo-url-500']);
+  request({
+      url: url,
+      json: true
+  }, function (error, response, body) {
 
-        for(var i=0;i<blog_stream.posts.length;i++)
-        {
-          //console.log(i+": "+ blog_stream['posts'][i]['photo-url-500']);
-          photo_urls[i]=blog_stream['posts'][i]['photo-url-500'];
+      if (!error && response.statusCode === 200) {
+          //console.log(body) // Print the json response
+          var inhale_jsonp=body;
 
-        }
-    }
-    else
-    {
-        photo_urls[0]='none';
-    }
-});
+          //clean and parse JSONp response from tumblr API
+          var blog_stream= inhale_jsonp.substring(22,inhale_jsonp.length-2);
+          blog_stream=JSON.parse(blog_stream);
+
+          //console.log(blog_stream['posts'][0]['photo-url-500']);
+
+          for(var i=0;i<blog_stream.posts.length;i++)
+          {
+            //console.log(i+": "+ blog_stream['posts'][i]['photo-url-500']);
+            photo_urls[i]=blog_stream['posts'][i]['photo-url-500'];
+
+          }
+      }
+      else
+      {
+          photo_urls[0]='none';
+      }
+  });
+
+  return photo_urls;
+
+}
 
 
 app.get('/', function(request, response) {
@@ -51,7 +59,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/api/tumblr_test',function(request, response) {
-  response.json(photo_urls);
+  response.json(GetPhotoURLs('http://rad0m1mg.tumblr.com/api/read/json'));
 });
 
 
