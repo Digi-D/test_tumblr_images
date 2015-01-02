@@ -56,5 +56,5 @@ app.get('/api/tumblr_test',function(request, response) {
 
 
 app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'));
+  console.log("Node app is running on:" + app.get('port'));
 });
