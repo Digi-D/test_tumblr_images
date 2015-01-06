@@ -5,17 +5,31 @@
 
   $(document).ready(function(){
 
+
     $.getJSON('/api/tumblr_test',function(list_of_photos){
 
-     for(var count=0;count<list_of_photos.length;count++)
-     {
-          //console.log(list_of_photos[count]+"\n");
-          $('#stage').append("<img id='frame_"+count+"' src='"+list_of_photos[count]+"' style='position:absolute; top:40px; left:40px;z-index:"+count+"; opacity:0.0;'/>");
-     }
+      console.log(list_of_photos);
+
+      if(list_of_photos[0]!=='none')
+      {
+
+         for(var count=0;count<list_of_photos.length;count++)
+         {
+              //console.log(list_of_photos[count]);
+              $('#stage').append("<img id='frame_"+count+"' src='"+list_of_photos[count]+"' style='position:absolute; top:40px; left:40px;z-index:"+count+"; opacity:0.0;'/>");
+         }
+
+         var everyFrame=setInterval(updateFrame,100);
+         //console.log("passed!");
+      }
+      else
+      {
+          $('#stage').html("oops... not a valid tumblr address");
+          //console.log("negative");
+      }
 
     });
 
-    var everyFrame=setInterval(updateFrame,100);
 
     function updateFrame(){
         var randomFrame="#frame_"+Math.floor(Math.random()*10);
